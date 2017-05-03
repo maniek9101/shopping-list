@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <title>Lista zakupoów</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .container {
+            width: 400px;
+            height: auto;
+            overflow: hidden;
+            box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+        }
+        
+        header {
+            padding: 55px;
+            background-color: #f1f1f1;
+            font-size: 30px;
+            background-image: url(logo.jpg);
+            background-position: center center;
+            background-size: cover;
+        }
+        
+        ul {
+            height: 60vh;
+            overflow: scroll;
+        }
+        
+        ul::-webkit-scrollbar {
+            display: none;
+        }
+        
+        li {
+            padding-top: 16px;
+            padding-bottom: 16px;
+            padding-left: 16px;
+            border-bottom: 1px solid #ddd;
+            background-position: center center;
+            background-size: cover;
+        }
+        
+        .foot {
+            padding-top: 16px;
+            padding-bottom: 16px;
+            padding-left: 16px;
+            padding-right: 16px;
+            background-color: #f1f1f1;
+            display: flex;
+            background-image: url(foot.jpg);
+            background-size: cover;
+            background-position: center center;
+        }
+        
+        input {
+            height: 40px;
+            padding-left: 16px;
+            width: 80%;
+        }
+        
+        .button {
+            background-color: #4CAF50;
+            width: 20%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            cursor: pointer;
+        }
+        
+        .button:hover {
+            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
+        }
+        
+        span {
+            float: right;
+            padding-right: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <header></header>
+        <ul>
+            <li>Milk<span>✘</span></li>
+            <li>Bread<span>✘</span></li>
+            <li>Cheese<span>✘</span></li>
+        </ul>
+        <div class="foot">
+            <input placeholder="Add shopping items here">
+            <div class="button">Add</div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+
+            $('.button').click(function() {
+                if ($('input').val() != "") {
+                    var text = $('input').val();
+                    $('ul').append("<li>" + text + "<span>✘</span></li>");
+                    $('input').val(""); // clear input after add new item.
+
+                    $('li').last().css('background', 'url(' + text + '.jpg)'); //set background-image like name
+                    $('li').last().css('background-position', 'center center');
+                    $('li').last().css('background-size', 'cover');
+
+                } else {
+                    alert("Uzupełnij puste pole");
+                }
+
+            });
+
+            //remove items
+            $('ul').on('click', 'span', function() {
+                var target = $(this).parent();
+                target.css('background', 'none');
+                target.remove();
+            });
+        });
+    </script>
+</body>
+
+</html>
